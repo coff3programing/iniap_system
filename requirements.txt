@@ -1,0 +1,4 @@
+django==3.2.24
+pillow
+mysqlclient
+django-admin-tailwind

@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %} Plants Section {% endblock %}
+
+{% block content %} 
+
+<img src="{% static "./img/img_bg.jpg" %}" class="bg_img w-100">
+
+<hr>
+<h3>Nature is life</h3>
+  <a
+  name=""
+  id=""
+  class="btn btn-primary rounded-pill hero__img "
+  href="{% url "create" %}"
+  role="button"
+  >+</a
+  >
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for el in books  %}
+    <div class="col">
+      <div class="text-center">
+        <h5 class="card-title mb-3 text-danger">{{ el.name}}</h5>
+          <br>
+      </div>
+
+      <div class="card">
+        <img src="{{ el.image.url }}" class="card-img-top" alt="Images of the website">
+        <div class="card-body text-center">
+          <p class="card-text">{{ el.description }}</p>
+          <p>{{el.measurement_number}}</p>
+          <section>
+            <a
+            name=""
+              id=""
+              class="btn btn-primary rounded-pill"
+              href="{% url "update" el.id %}"
+              role="button"
+              >Update</a
+            >
+            <a
+              name=""
+              id=""
+              class="btn btn-primary rounded-pill mx-4"
+              href="{% url "delete" el.id %}"
+              role="button"
+              onclick="return confirm('Are you sure you want to delete')"
+              >
+              Delete</a
+            >
+          </section>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  {% for my_input in form %}
+  <label
+    for=""
+    class="form-label">
+    {{my_input.label}}
+  </label>
+
+  {% if my_input.field.widget.input_type == 'file' and my_input.value %}
+    <br>
+    <img src="{{MEDIA_URL}}/img/{{ my_input.value }}" with="100" alt="">
+  {% endif %}
+
+  <input
+    type="{{ my_input.field.widget.input_type }}"
+    name="{{ my_input.name }}"
+    placeholder="{{my_input.label}}"
+    aria-label="{{ my_input.label }}"
+    value="{{my_input.value | default:""}}"
+    class="rounded-pill" />
+    <div class="col-12 help-text">{{ my_input.errors }}</div>
+  {% endfor %}
+  <div class="text-center">
+    <button type="submit" class="w-25 p-2 rounded-pill">Send</button>
+    <a
+      class="btn btn-primary rounded-pill"
+      href="{% url "books" %}"
+      role="button"
+      >Cancel</a
+    >
+    
+  </div>
+</form>
